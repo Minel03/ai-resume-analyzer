@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 AI Resume Analyzer & Career Suite
 
-## Getting Started
+A professional-grade, AI-powered platform designed to help job seekers optimize their resumes for Applicant Tracking Systems (ATS), generate tailored career documents, and prepare for interviews with precision.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Groq AI](https://img.shields.io/badge/Groq_AI-f3ac00?style=for-the-badge&logo=lightning&logoColor=black)
+
+---
+
+## ✨ Key Features
+
+### 📊 Advanced ATS Scoring
+
+- **Performance Metrics**: Detailed scoring on **Impact, Brevity, Style, and Soft Skills**.
+- **Job Matching**: Paste a Job Description to get a real-time **Match Rate** and identify critical skill gaps.
+- **Contact Audit**: Automated verification of essential contact links (Email, Phone, LinkedIn, Portfolio).
+
+### ✍️ AI-Powered Content Creation
+
+- **Personalized Rewriter**: Paste any resume bullet point and generate 3 professional variations (Action-Oriented, Data-Driven, Concise).
+- **Cover Letter Generator**: Instant generation of 100% tailored cover letters based on your resume and a specific job description.
+
+### 🎯 Career Coaching & Prep
+
+- **Interview Prep Assistant**: Custom AI-generated interview questions and perfect STAR-method answers based on your experience.
+- **Learning Roadmaps**: Hover over any missing skill to receive AI-curated advice on how to master it.
+- **Persistent History**: Local tracking of your last 10 scans to monitor your optimization progress.
+
+### 📄 Professional Export
+
+- **Print-Optimized Reports**: Export your full analysis into a clean, professional PDF report.
+- **Premium UI**: Sleek dark-mode interface with smooth animations and responsive design.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **AI Engine**: [Groq Cloud SDK](https://groq.com/) (Llama 3.3 70B model)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **PDF Parsing**: `pdf-parse` for robust server-side text extraction.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/ai-resume-analyzer.git
+cd ai-resume-analyzer
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛡️ Privacy & Data
 
-## Learn More
+- **Local Processing**: Analysis results are stored in your browser's `localStorage`. No personal data is stored on our servers.
+- **Secure AI**: We use the Groq API for lightning-fast, private AI processing.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
