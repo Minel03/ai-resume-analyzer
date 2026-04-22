@@ -166,13 +166,15 @@ export default function AnalyzePage() {
           </button>
           
           <div className="flex items-center gap-3">
-            <button 
-              onClick={handleGenerateCoverLetter}
-              className="hidden md:flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all border border-blue-100 dark:border-blue-800"
-            >
-              <FileText className="w-4 h-4" />
-              Generate Cover Letter
-            </button>
+            {result.originalJD && (
+              <button 
+                onClick={handleGenerateCoverLetter}
+                className="hidden md:flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all border border-blue-100 dark:border-blue-800"
+              >
+                <FileText className="w-4 h-4" />
+                Generate Cover Letter
+              </button>
+            )}
             <button 
               onClick={() => window.print()}
               className="flex items-center gap-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-2 rounded-lg text-sm font-bold hover:opacity-90 transition-all shadow-lg"
@@ -189,7 +191,7 @@ export default function AnalyzePage() {
           
           {/* Left Column */}
           <div className="lg:col-span-4 space-y-8">
-            <ResumeScore score={result.score} matchRate={result.matchRate} />
+            <ResumeScore score={result.score} matchRate={result.originalJD ? result.matchRate : undefined} />
             <SectionScores scores={result.sectionScores} />
             <ContactAudit audit={result.contactInfoAudit} />
             
@@ -214,14 +216,14 @@ export default function AnalyzePage() {
 
           {/* Right Column */}
           <div className="lg:col-span-8 space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className={`grid grid-cols-1 ${result.originalJD ? 'md:grid-cols-2' : ''} gap-8`}>
               <SkillList title="Detected Skills" skills={result.skills} type="extracted" />
-              <SkillList title="Missing Skills" skills={result.missing} type="missing" />
+              {result.originalJD && <SkillList title="Missing Skills" skills={result.missing} type="missing" />}
             </div>
 
 
 
-            <InterviewPrep questions={result.interviewPrep} />
+            {result.originalJD && <InterviewPrep questions={result.interviewPrep} />}
 
             <div className="space-y-8">
               <SuggestionList title="Resume Improvements" suggestions={result.suggestions} type="improvement" onLearnMore={handleLearnMore} />
@@ -235,7 +237,7 @@ export default function AnalyzePage() {
               </div>
               <h3 className="text-xl font-bold mb-2">Final Verdict</h3>
               <p className="text-blue-100 leading-relaxed relative z-10">
-                Your resume is {result.score >= 80 ? 'strong but has room for fine-tuning.' : 'in need of optimization.'} {result.matchRate > 0 && `Your match rate is ${result.matchRate}%.`} Focus on the improvements below.
+                Your resume is {result.score >= 80 ? 'strong but has room for fine-tuning.' : 'in need of optimization.'} {result.originalJD && result.matchRate > 0 && `Your match rate is ${result.matchRate}%.`} Focus on the improvements below.
               </p>
             </div>
           </div>

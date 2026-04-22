@@ -38,11 +38,17 @@ export async function analyzeResume(resumeText: string, jobDescription?: string,
         "originalText": "the resume text provided"
       }
 
+      SCORING GUIDELINES:
+      - "score": (0-100) A general assessment of resume quality regardless of any job description. Evaluate based on action verbs, clarity, impact, and standard ATS formatting rules.
+      - "matchRate": (0-100) ONLY calculated if a Job Description is provided. It measures the keyword and skill overlap. If NO Job Description is provided, this MUST be 0.
+      
       CRITICAL for missing skills:
-      - For every missing skill, provide a "roadmap" property with a specific recommendation (e.g., "Take the official Redis University course" or "Explore MDN docs for Unix basics").
+      - If no JD is provided, "missing" should list general industry-standard skills that would enhance this specific resume.
+      - If a JD is provided, "missing" must list skills required by the JD that are not found in the resume.
 
       CRITICAL for interviewPrep:
-      - Generate 3-5 highly relevant questions that a recruiter might ask this specific candidate for this specific role.
+      - If no JD is provided, generate general behavioral interview questions.
+      - If a JD is provided, generate questions specific to the role and the gaps in the resume.
 
       Resume Text:
       "${resumeText}"
@@ -53,7 +59,7 @@ export async function analyzeResume(resumeText: string, jobDescription?: string,
       messages: [
         {
           role: "system",
-          content: "You are a professional resume analyzer that outputs strictly valid JSON."
+          content: "You are a professional resume analyzer. All numeric scores (score, matchRate, and sectionScores) MUST be integers between 0 and 100. Output strictly valid JSON."
         },
         {
           role: "user",
