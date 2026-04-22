@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('API Route Error:', error);
     return NextResponse.json(
-      { error: 'Internal Server Error during analysis' },
+      { error: error instanceof Error ? error.message : 'Internal Server Error during analysis' },
       { status: 500 },
     );
   }

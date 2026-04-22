@@ -1,24 +1,18 @@
 import { PDFParse } from 'pdf-parse';
-import path from 'path';
-import { pathToFileURL } from 'url';
 
 export async function parseResume(fileBuffer: Buffer) {
   try {
-    // Point to the local worker file in node_modules
-    try {
-      const workerPath = path.resolve('node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs');
-      // Convert the Windows path (C:\...) to a valid file URL (file:///C:/...) for the ESM loader
-      PDFParse.setWorker(pathToFileURL(workerPath).href);
-    } catch (e) {
-      // Ignore
-    }
-
+    // Note: We avoid calling PDFParse.setWorker with hardcoded node_modules paths 
+    // as it causes 500 errors on Vercel. The library will attempt to use a default.
     const parser = new PDFParse({ data: fileBuffer });
     const result = await parser.getText();
+    
+    // Always clean up to prevent memory leaks
     await parser.destroy();
+    
     return result.text;
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error parsing PDF:', error);
-    throw new Error('Failed to parse PDF resume');
+    throw new Error('Failed to parse PDF resume: ' + (error.message || 'Unknown error'));
   }
 }
