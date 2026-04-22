@@ -2,8 +2,13 @@ import { PDFParse } from 'pdf-parse';
 
 export async function parseResume(fileBuffer: Buffer) {
   try {
-    // Note: We avoid calling PDFParse.setWorker with hardcoded node_modules paths 
-    // as it causes 500 errors on Vercel. The library will attempt to use a default.
+    // Use a CDN for the worker to avoid Vercel path issues
+    try {
+      PDFParse.setWorker('https://unpkg.com/pdfjs-dist@5.4.296/build/pdf.worker.min.mjs');
+    } catch (e) {
+      console.warn('Failed to set CDN worker, using default');
+    }
+
     const parser = new PDFParse({ data: fileBuffer });
     const result = await parser.getText();
     

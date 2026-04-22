@@ -74,8 +74,14 @@ export async function analyzeResume(resumeText: string, jobDescription?: string,
       temperature: 0
     });
 
-    const result = JSON.parse(response.choices[0].message.content || "{}");
-    return result;
+    const content = response.choices[0].message.content || "{}";
+    try {
+      const result = JSON.parse(content);
+      return result;
+    } catch (e) {
+      console.error("AI returned invalid JSON:", content);
+      throw new Error("The AI returned a malformed response. This can happen with very long resumes. Please try again.");
+    }
   } catch (error) {
     console.error("AI Analysis Error:", error);
     throw new Error("Failed to analyze resume with AI");
